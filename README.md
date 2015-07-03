@@ -1,4 +1,4 @@
-# BlackLabelOps/DockerBase
+[![Docker Hub Info](http://dockeri.co/image/blacklabelops/centos)](https://registry.hub.docker.com/u/blacklabelops/centos)
 
 In my view the most flexible way to build Docker Base Images. This project builds docker base images from kickstart files.
 
