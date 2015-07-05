@@ -1,0 +1,17 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker version
+    - docker info
+    - docker build -t="blacklabelops/centos" .
+
+test:
+  override:
+    - docker run -d --name="centosbase" blacklabelops/centos
+    - sleep 10
+    - docker stop centosbase
+    - docker rm centosbase
+    - docker rmi blacklabelops/centos
