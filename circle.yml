@@ -7,6 +7,7 @@ dependencies:
     - docker version
     - docker info
     - docker build -t="blacklabelops/centos" .
+    - docker images
 
 test:
   override:
