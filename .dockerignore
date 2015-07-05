@@ -1,0 +1,5 @@
+.git
+.vagrant
+scripts
+README.md
+*.img
