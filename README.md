@@ -1,5 +1,8 @@
 [![Docker Hub Info](http://dockeri.co/image/blacklabelops/centos)](https://registry.hub.docker.com/u/blacklabelops/centos)
 
+[![Docker Build Status](http://hubstatus.container42.com/blacklabelops/centos)](https://registry.hub.docker.com/u/blacklabelops/centos)
+[![Circle CI](https://circleci.com/gh/blacklabelops/centos/tree/master.svg?style=svg)](https://circleci.com/gh/blacklabelops/centos/tree/master)
+
 In my view the most flexible way to build Docker Base Images. This project builds docker base images from kickstart files.
 
 I have wrapped this [CentOS Tutorial](https://github.com/CentOS/sig-cloud-instance-build/tree/master/docker) inside a working Vagrant box to build my own centos base images. It uses [KatzJ Ami-Creator](https://github.com/katzj/ami-creator) to build images and extracts them with [Guestfish](http://libguestfs.org/guestfish.1.html) inside Docker compatible tar balls.
