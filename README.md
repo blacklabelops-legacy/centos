@@ -54,7 +54,7 @@ $ exit
 Importing the tarball into docker:
 
 ~~~~
-$ cat blacklabelops-centos7.tar.gz | docker import - blacklabelops/centos
+$ cat blacklabelops-centos7.xz | docker import - blacklabelops/centos
 ~~~~ 
 
 ## References
