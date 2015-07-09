@@ -14,4 +14,3 @@ test:
     - docker run -d --name="centosbase" blacklabelops/centos bash
     - sleep 10
     - docker stop centosbase
-    - docker rmi -f blacklabelops/centos
