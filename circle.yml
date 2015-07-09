@@ -13,4 +13,5 @@ test:
   override:
     - docker run -d --name="centosbase" blacklabelops/centos bash
     - sleep 10
+    - docker ps
     - docker stop centosbase
