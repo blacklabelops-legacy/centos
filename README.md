@@ -2,6 +2,7 @@
 
 [![Docker Build Status](http://hubstatus.container42.com/blacklabelops/centos)](https://registry.hub.docker.com/u/blacklabelops/centos)
 [![Circle CI](https://circleci.com/gh/blacklabelops/centos/tree/master.svg?style=svg)](https://circleci.com/gh/blacklabelops/centos/tree/master)
+[![](https://badge.imagelayers.io/blacklabelops/centos:latest.svg)](https://imagelayers.io/?images=blacklabelops/centos:latest 'Get your own badge on imagelayers.io')
 
 In my view the most flexible way to build Docker Base Images. This project builds docker base images from kickstart files.
 
