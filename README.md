@@ -67,6 +67,3 @@ $ cat blacklabelops-centos7.xz | docker import - blacklabelops/centos
 * [Virtualbox Homepage](https://www.virtualbox.org/)
 * [Docker Homepage](https://www.docker.com/)
 
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/blacklabelops/centos/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
