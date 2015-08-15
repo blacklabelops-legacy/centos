@@ -117,6 +117,7 @@ yum-utils
 zlib
 libffi
 libsemanage
+vi
 -systemd
 systemd-container
 %end
