@@ -6,7 +6,7 @@ auth --enableshadow --passalgo=sha512 --kickstart
 rootpw doorentry
 firewall --disabled
 selinux --enforcing
-repo --name="CentOS" --baseurl=http://mirror.centos.org/centos/7/os/x86_64/ --cost=100
+repo --name="CentOS" --baseurl=http://mirror.centos.org/centos/7.2.1511/os/x86_64/ --cost=100
 repo --name="systemdcontainer" --baseurl=http://dev.centos.org/centos/7/systemd-container/ --cost=100
 clearpart --all --initlabel
 part / --fstype ext4 --size=1024 --grow
