@@ -4,7 +4,6 @@ keyboard us-acentos
 network --bootproto=dhcp --device=eth0 --onboot=on
 auth --enableshadow --passalgo=sha512 --kickstart
 rootpw doorentry
-timezone --utc UTC
 firewall --disabled
 selinux --enforcing
 repo --name="CentOS" --baseurl=http://mirror.centos.org/centos/7/os/x86_64/ --cost=100
