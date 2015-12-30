@@ -1,6 +1,3 @@
-[![Docker Hub Info](http://dockeri.co/image/blacklabelops/centos)](https://registry.hub.docker.com/u/blacklabelops/centos)
-
-[![Docker Build Status](http://hubstatus.container42.com/blacklabelops/centos)](https://registry.hub.docker.com/u/blacklabelops/centos)
 [![Circle CI](https://circleci.com/gh/blacklabelops/centos/tree/master.svg?style=svg)](https://circleci.com/gh/blacklabelops/centos/tree/master)
 [![](https://badge.imagelayers.io/blacklabelops/centos:latest.svg)](https://imagelayers.io/?images=blacklabelops/centos:latest 'Get your own badge on imagelayers.io')
 
@@ -44,19 +41,19 @@ Extract the image in a tarball.
 
 ~~~~
 $ ./extractImage.sh blacklabelops-centos7.img blacklabelops-centos7
-~~~~ 
+~~~~
 
 Now its time to exit the box!
 
 ~~~~
 $ exit
-~~~~ 
+~~~~
 
 Importing the tarball into docker:
 
 ~~~~
 $ cat blacklabelops-centos7.xz | docker import - blacklabelops/centos
-~~~~ 
+~~~~
 
 ## References
 
@@ -66,4 +63,3 @@ $ cat blacklabelops-centos7.xz | docker import - blacklabelops/centos
 * [Vagrant Homepage](https://www.vagrantup.com/)
 * [Virtualbox Homepage](https://www.virtualbox.org/)
 * [Docker Homepage](https://www.docker.com/)
-
