@@ -55,6 +55,26 @@ Importing the tarball into docker:
 $ cat blacklabelops-centos7.xz | docker import - blacklabelops/centos
 ~~~~
 
+Optional: Update and Squash the CentOS base image!
+
+~~~~
+$ ./dockerbox/squashImage.sh
+~~~~
+
+## Update Security Conflicted Packages
+
+The base image does not contain the latest CentOS packages! The kickstart file and the amicreator are not able to update packages during image generation!
+
+This introduces new problems because new dependent images are not able to update base packages. The update routine will result in an error saying that dependend systemd-container packages are conflicting.
+
+In order to retrieve an archive of latest packages I have written the following update script:
+
+~~~~
+$ ./dockerbox/squashImage.sh
+~~~~
+
+> This will build a docker image and update all packages, the result will be squashed inside a new xz-archive.
+
 ## References
 
 * [Blacklabelops Docker CenOS Image](https://registry.hub.docker.com/u/blacklabelops/centos/)
