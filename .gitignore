@@ -2,3 +2,4 @@
 .vagrant
 *.img
 *.gz
+dockerbox/*.xz
