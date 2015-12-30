@@ -6,8 +6,8 @@ auth --enableshadow --passalgo=sha512 --kickstart
 rootpw doorentry
 firewall --disabled
 selinux --enforcing
-repo --name="CentOS" --baseurl=http://mirror.centos.org/centos/7.2.1511/os/x86_64/ --cost=100
-repo --name="systemdcontainer" --baseurl=http://dev.centos.org/centos/7/systemd-container/ --cost=100
+repo --name=CentOS --baseurl=http://mirror.centos.org/centos/7.2.1511/os/x86_64/ --cost=100
+repo --name=systemdcontainer --baseurl=http://dev.centos.org/centos/7/systemd-container/ --cost=100
 clearpart --all --initlabel
 part / --fstype ext4 --size=1024 --grow
 reboot
@@ -128,10 +128,7 @@ passwd -l root
 
 #Deleting and cleaning anything I could grasp from other kickstart file examples.
 
-yum -y remove  grub2 centos-logos hwdata os-prober gettext* \
-  bind-license freetype kmod dracut firewalld dbus-glib dbus-python ebtables \
-  gobject-introspection libselinux-python pygobject3-base \
-  python-decorator python-slip python-slip-dbus
+yum -y remove freetype
 
 find /usr/share/{man,doc,info,gnome/help} \
         -type f | xargs /bin/rm
