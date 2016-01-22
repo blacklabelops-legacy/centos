@@ -6,7 +6,7 @@ set -o errexit    # abort script at first error
 cd dockerbox
 
 #Copy the binary
-cp ../blacklabelops-centos7.xz .
+cp ../blacklabelops-centos-7.1.1503.xz blacklabelops-centos7.xz
 test -f ./blacklabelops-centos7.xz
 
 #Start vagrant box
