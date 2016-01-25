@@ -1,5 +1,7 @@
-[![Circle CI](https://circleci.com/gh/blacklabelops/centos/tree/master.svg?style=svg)](https://circleci.com/gh/blacklabelops/centos/tree/master)
-[![](https://badge.imagelayers.io/blacklabelops/centos:latest.svg)](https://imagelayers.io/?images=blacklabelops/centos:latest 'Get your own badge on imagelayers.io')
+
+# Docker CentOS 7 Base Image
+
+[![Circle CI](https://circleci.com/gh/blacklabelops/centos/tree/master.svg?style=shield)](https://circleci.com/gh/blacklabelops/centos/tree/master) [![Docker Repository on Quay.io](https://quay.io/repository/blacklabelops/centos/status "Docker Repository on Quay")](https://quay.io/repository/blacklabelops/centos) [![Docker Stars](https://img.shields.io/docker/stars/blacklabelops/centos.svg)](https://hub.docker.com/r/blacklabelops/centos/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacklabelops/centos.svg)](https://hub.docker.com/r/blacklabelops/centos/)
 
 In my view the most flexible way to build Docker Base Images. This project builds docker base images from kickstart files.
 
@@ -77,6 +79,7 @@ $ ./dockerbox/squashImage.sh
 
 ## References
 
+* [Imagelayers.io](https://imagelayers.io/?images=blacklabelops%2Fcentos:latest)
 * [Blacklabelops Docker CenOS Image](https://registry.hub.docker.com/u/blacklabelops/centos/)
 * [KatzJ Ami-Creator](https://github.com/katzj/ami-creator)
 * [Guestfish](http://libguestfs.org/guestfish.1.html)
