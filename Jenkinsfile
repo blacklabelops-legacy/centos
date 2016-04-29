@@ -13,7 +13,7 @@
 /**
  * Build parameters, must be adjusted when forked!
  **/
-def env.dockerTagName = 'blacklabelops/centos'
+def dockerTagName = 'blacklabelops/centos'
 
 node('vagrant') {
   checkout scm
@@ -53,5 +53,5 @@ node('dockerhub') {
   // Build the docker base image
   stage 'Docker-Image'
   unarchive mapping: ['blacklabelops-centos7.xz': 'blacklabelops-centos7.xz']
-  sh 'docker build --no-cache -t ${dockerTagName} .'
+  sh 'docker build --no-cache -t ' + dockerTagName + ' .'
 }
