@@ -17,7 +17,8 @@ def repository = 'https://github.com/blacklabelops/centos.git'
 def branch = 'master'
 def dockerTagName = 'blacklabelops/centos'
 node('packer') {
-  git branch: branch, changelog: false, poll: false, url: repository
+  //git branch: branch, changelog: false, poll: false, url: repository
+  checkout scm
 
   stage 'Clean'
   sh './build/clean.sh'
@@ -37,7 +38,8 @@ node('packer') {
   sh './clean.sh'
 }
 node('docker') {
-  git branch: branch, changelog: false, poll: false, url: repository
+  //git branch: branch, changelog: false, poll: false, url: repository
+  checkout scm
 
   stage 'Docker-Image'
   unarchive mapping: ['blacklabelops-centos7.xz': 'blacklabelops-centos7.xz']
