@@ -7,6 +7,8 @@
  * docker run -d -v /dev/vboxdrv:/dev/vboxdrv --link jenkins:jenkins -e "SWARM_CLIENT_LABELS=docker" blacklabelops/hashicorp-virtualbox
  **/
 node('packer') {
+  git changelog: false, poll: false, url: 'https://github.com/blacklabelops/centos.git'
+
   stage 'Clean'
   sh 'exec build/clean.sh'
   sh 'exec clean.sh'
