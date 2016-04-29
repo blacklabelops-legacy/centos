@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 
 rm -f *.tar
 rm -f *.img

@@ -13,15 +13,22 @@
 /**
  * Build parameters, must be adjusted when forked!
  **/
-def dockerTagName = 'blacklabelops/centos'
-node('packer') {
+def env.dockerTagName = 'blacklabelops/centos'
+
+node('vagrant') {
   checkout scm
 
+  // Properly clean the machine
   stage 'Clean'
   sh './build/clean.sh'
+  /**
+   * Destroys and deletes all Vagrant boxes on build machine!
+   * Required for exited builds during box downloads.
+   **/
   sh './clean.sh'
   sh 'vagrant up'
 
+  // Build and extract the base image
   stage 'Build'
   sh 'rm -f blacklabelops-centos7.xz'
   sh './build.sh'
@@ -30,13 +37,20 @@ node('packer') {
   stage 'Save-Docker-Tar'
   archive 'blacklabelops-centos7.xz'
 
+  // Properly clean the machine
   stage 'Clean-Vagrantbox'
   sh 'vagrant destroy -f'
+  /**
+   * Destroys and deletes all Vagrant boxes on build machine!
+   * Required for exited builds during box downloads.
+   **/
   sh './clean.sh'
 }
-node('docker') {
+
+node('dockerhub') {
   checkout scm
 
+  // Build the docker base image
   stage 'Docker-Image'
   unarchive mapping: ['blacklabelops-centos7.xz': 'blacklabelops-centos7.xz']
   sh 'docker build --no-cache -t ${dockerTagName} .'

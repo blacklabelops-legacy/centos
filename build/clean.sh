@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 
 #Destroys and deletes all Vagrant boxes on build machine!
 rm -rf ~/.vagrant.d/boxes
