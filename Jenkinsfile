@@ -9,7 +9,16 @@
  * Slave 'docker' can be started by typing:
  * docker run -d -v /var/run/docker.sock:/var/run/docker.sock --link jenkins:jenkins -e "SWARM_CLIENT_LABELS=docker" blacklabelops/swarm-dockerhost
  **/
+
+/**
+ * Build parameters, must be adjusted when branched or forked!
+ **/
+def repository = 'https://github.com/blacklabelops/centos.git'
+def branch = 'master'
+def dockerTagName = 'blacklabelops/centos'
 node('packer') {
+  git branch: branch, changelog: false, poll: false, url: repository
+
   stage 'Clean'
   sh './build/clean.sh'
   sh './clean.sh'
@@ -28,6 +37,9 @@ node('packer') {
   sh './clean.sh'
 }
 node('docker') {
+  git branch: branch, changelog: false, poll: false, url: repository
+
   stage 'Docker-Image'
   unarchive mapping: ['blacklabelops-centos7.xz': 'blacklabelops-centos7.xz']
+  sh 'docker build --no-cache -t ${dockerTagName} .'
 }
