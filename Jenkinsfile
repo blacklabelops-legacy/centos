@@ -8,16 +8,16 @@
  **/
 node('packer') {
   stage 'Clean'
-  sh 'build/clean.sh'
-  sh 'clean.sh'
+  sh 'exec build/clean.sh'
+  sh 'exec clean.sh'
   sh 'vagrant up'
 
   stage 'Build'
   sh 'rm -f blacklabelops-centos7.xz'
-  sh 'build.sh'
-  sh 'dockerbox/squashImage.sh'
+  sh 'exec build.sh'
+  sh 'exec dockerbox/squashImage.sh'
 
   stage 'Post-Clean'
   sh 'vagrant destroy -f'
-  sh 'clean.sh'
+  sh 'exec clean.sh'
 }
