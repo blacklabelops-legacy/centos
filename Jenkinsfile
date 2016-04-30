@@ -44,6 +44,15 @@ node('vagrant') {
   }
 
 }
+def dockerTestCommands =
+  ["echo hello world",
+   "ps -All",
+   "uname -r",
+   "whoami",
+   "du -h",
+   "cat /etc/hosts",
+   "cat /etc/passwd",
+   "yum check-update" ] as String[]
 node('docker') {
   checkout scm
 
@@ -51,6 +60,11 @@ node('docker') {
   echo 'Building the docker base image'
   unarchive mapping: ['blacklabelops-centos7.xz': 'blacklabelops-centos7.xz']
   sh 'docker build --no-cache -t $DockerImageName .'
+
+  stage 'Image-Tests'
+  for (int i=0;i < dockerTestCommands.length;i++) {
+    sh 'docker run -it --rm $DockerImageName ' + dockerTestCommands[i]
+  }
 
   stage 'Dockerhub-Login'
   dockerHubLogin()

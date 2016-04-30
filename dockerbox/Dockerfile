@@ -1,5 +1,5 @@
 FROM scratch
-MAINTAINER Steffen Bleul <blacklabelops@itbleul.de>
+MAINTAINER Steffen Bleul <sbl@blacklabelops.com>
 ADD blacklabelops-centos7.xz /
 RUN yum update -y && \
-    yum clean all && rm -rf /var/cache/yum/*
+    yum clean all && rm -rf /var/cache/yum/* && rm -rf /var/log/*
