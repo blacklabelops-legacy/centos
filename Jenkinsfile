@@ -13,45 +13,88 @@
 /**
  * Build parameters, must be adjusted when forked!
  **/
-def dockerTagName = 'blacklabelops/centos'
-
+ env.DockerImageName = 'blacklabelops/centos'
+ def dockerTags = ["7", "7.2", "7.2.1511"] as String[]
 node('vagrant') {
   checkout scm
 
-  // Properly clean the machine
-  stage 'Clean'
-  sh './build/clean.sh'
-  /**
-   * Destroys and deletes all Vagrant boxes on build machine!
-   * Required for exited builds during box downloads.
-   **/
+  stage 'Pre-Clean-Vagrantbox'
+  echo 'Properly clean the machine'
+  echo 'Destroy Vagrant box'
+  sh 'vagrant destroy -f'
+  echo 'Properly clean the machine'
+  echo 'Destroys and deletes all Vagrant boxes on build machine!'
+  echo 'Required for exited builds during box downloads'
   sh './clean.sh'
-  sh 'vagrant up'
 
-  // Build and extract the base image
-  stage 'Build'
+  stage 'Build-Base'
+  echo 'Starting Vagrant box'
+  sh 'vagrant up'
+  echo 'Removing old build artifact'
   sh 'rm -f blacklabelops-centos7.xz'
+  echo 'Building base image'
   sh './build.sh'
+  echo 'Updating and sqashing base image'
   sh './dockerbox/squashImage.sh'
 
-  stage 'Save-Docker-Tar'
+  stage 'Archive-Image'
+  echo 'Archiving base image'
   archive 'blacklabelops-centos7.xz'
 
-  // Properly clean the machine
-  stage 'Clean-Vagrantbox'
+  stage 'Post-Clean-Vagrantbox'
+  echo 'Properly clean the machine'
+  echo 'Destroy Vagrant box'
   sh 'vagrant destroy -f'
-  /**
-   * Destroys and deletes all Vagrant boxes on build machine!
-   * Required for exited builds during box downloads.
-   **/
+  echo 'Properly clean the machine'
+  echo 'Destroys and deletes all Vagrant boxes on build machine!'
+  echo 'Required for exited builds during box downloads'
   sh './clean.sh'
-}
 
-node('dockerhub') {
+}
+node('docker') {
   checkout scm
 
-  // Build the docker base image
   stage 'Docker-Image'
+  echo 'Building the docker base image'
   unarchive mapping: ['blacklabelops-centos7.xz': 'blacklabelops-centos7.xz']
-  sh 'docker build --no-cache -t ' + dockerTagName + ' .'
+  sh 'docker build --no-cache -t $DockerImageName .'
+
+  stage 'Dockerhub-Login'
+  dockerHubLogin()
+
+  stage 'Dockerhub-Push'
+  dockerPush('$DockerImageName','latest')
+
+  stage 'Dockerhub-Push-Tags'
+  for (int i=0;i < dockerTags.length;i++) {
+      dockerPush('$DockerImageName',dockerTags[i])
+  }
+
+  stage 'Dockerhub-Logout'
+  sh 'docker logout'
+}
+
+/**
+ * Docker needs three parameters to work, I distributed those Credentials inside
+ * two Jenkins-UsernamePassword Credentials.
+ * Credentials 'Dockerhub' with Dockerhub username and password
+ * Credentials 'DockerhubEmail' with the email inside the password field.
+ **/
+def dockerHubLogin() {
+  echo 'Login to Dockerhub with Credentials Dockerhub and DockerhubEmail'
+  withCredentials([[$class: 'UsernamePasswordMultiBinding',
+    credentialsId: 'Dockerhub',
+    usernameVariable: 'USERNAME',
+    passwordVariable: 'PASSWORD']]) {
+    withCredentials([[$class: 'UsernamePasswordMultiBinding',
+      credentialsId: 'DockerhubEmail',
+      usernameVariable: 'DUMMY',
+      passwordVariable: 'EMAIL']]) {
+      sh 'docker login --email $EMAIL --username $USERNAME --password $PASSWORD'
+    }
+  }
+}
+
+def dockerPush(imageName, tagName) {
+    sh 'docker push ' + imageName + ':' + tagName
 }
