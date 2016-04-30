@@ -17,7 +17,7 @@ env.DockerImageName = 'blacklabelops/centos'
 def dockerTags = ["7", "7.2", "7.2.1511"] as String[]
 node('vagrant') {
   checkout scm
-
+  echo 'MY CHANGE'
   try {
     stage 'Build-Base'
     echo 'Starting Vagrant box'
