@@ -13,42 +13,35 @@
 /**
  * Build parameters, must be adjusted when forked!
  **/
- env.DockerImageName = 'blacklabelops/centos'
- def dockerTags = ["7", "7.2", "7.2.1511"] as String[]
+env.DockerImageName = 'blacklabelops/centos'
+def dockerTags = ["7", "7.2", "7.2.1511"] as String[]
 node('vagrant') {
   checkout scm
 
-  stage 'Pre-Clean-Vagrantbox'
-  echo 'Properly clean the machine'
-  echo 'Destroy Vagrant box'
-  sh 'vagrant destroy -f'
-  echo 'Properly clean the machine'
-  echo 'Destroys and deletes all Vagrant boxes on build machine!'
-  echo 'Required for exited builds during box downloads'
-  sh './clean.sh'
+  try {
+    stage 'Build-Base'
+    echo 'Starting Vagrant box'
+    sh 'vagrant up'
+    echo 'Removing old build artifact'
+    sh 'rm -f blacklabelops-centos7.xz'
+    echo 'Building base image'
+    sh './build.sh'
+    echo 'Updating and sqashing base image'
+    sh './dockerbox/squashImage.sh'
 
-  stage 'Build-Base'
-  echo 'Starting Vagrant box'
-  sh 'vagrant up'
-  echo 'Removing old build artifact'
-  sh 'rm -f blacklabelops-centos7.xz'
-  echo 'Building base image'
-  sh './build.sh'
-  echo 'Updating and sqashing base image'
-  sh './dockerbox/squashImage.sh'
-
-  stage 'Archive-Image'
-  echo 'Archiving base image'
-  archive 'blacklabelops-centos7.xz'
-
-  stage 'Post-Clean-Vagrantbox'
-  echo 'Properly clean the machine'
-  echo 'Destroy Vagrant box'
-  sh 'vagrant destroy -f'
-  echo 'Properly clean the machine'
-  echo 'Destroys and deletes all Vagrant boxes on build machine!'
-  echo 'Required for exited builds during box downloads'
-  sh './clean.sh'
+    stage 'Archive-Image'
+    echo 'Archiving base image'
+    archive 'blacklabelops-centos7.xz'
+  } finally {
+    stage 'Post-Clean-Vagrantbox'
+    echo 'Properly clean the machine'
+    echo 'Destroy Vagrant box'
+    sh 'vagrant destroy -f'
+    echo 'Properly clean the machine'
+    echo 'Destroys and deletes all Vagrant boxes on build machine!'
+    echo 'Required for exited builds during box downloads'
+    sh './clean.sh'
+  }
 
 }
 node('docker') {
@@ -62,16 +55,18 @@ node('docker') {
   stage 'Dockerhub-Login'
   dockerHubLogin()
 
-  stage 'Dockerhub-Push'
-  dockerPush('$DockerImageName','latest')
+  try {
+    stage 'Dockerhub-Push'
+    dockerPush('$DockerImageName','latest')
 
-  stage 'Dockerhub-Push-Tags'
-  for (int i=0;i < dockerTags.length;i++) {
-      dockerPush('$DockerImageName',dockerTags[i])
+    stage 'Dockerhub-Push-Tags'
+    for (int i=0;i < dockerTags.length;i++) {
+        dockerPush('$DockerImageName',dockerTags[i])
+    }
+  } finally {
+    stage 'Dockerhub-Logout'
+    sh 'docker logout'
   }
-
-  stage 'Dockerhub-Logout'
-  sh 'docker logout'
 }
 
 /**
