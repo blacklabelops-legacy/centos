@@ -19,7 +19,7 @@ vagrant ssh -c "docker build --file /vagrant/Dockerfile --tag centosupdate /vagr
 vagrant ssh -c "docker run --name centossquash centosupdate bash"
 
 #Squash the containers content
-vagrant ssh -c "docker cp centossquash:/ - | xz --best >> /vagrant/dockerbox/blacklabelops-centos7-updated.xz"
+vagrant ssh -c "docker cp centossquash:/ - | xz --best >> /vagrant/blacklabelops-centos7-updated.xz"
 
 #Destroy box
 vagrant destroy -f
