@@ -63,7 +63,7 @@ node('docker') {
 
   stage 'Image-Tests'
   for (int i=0;i < dockerTestCommands.length;i++) {
-    sh 'docker run -it --rm $DockerImageName ' + dockerTestCommands[i]
+    sh 'docker run --rm $DockerImageName ' + dockerTestCommands[i]
   }
 
   stage 'Dockerhub-Login'
