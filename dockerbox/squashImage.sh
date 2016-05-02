@@ -9,6 +9,9 @@ cd dockerbox
 cp ../blacklabelops-centos7.xz .
 test -f ./blacklabelops-centos7.xz
 
+#Destroy box
+vagrant destroy -f
+
 #Start vagrant box
 vagrant up
 
