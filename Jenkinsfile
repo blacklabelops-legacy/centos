@@ -49,7 +49,6 @@ def dockerTestCommands =
    "ps -All",
    "uname -r",
    "whoami",
-   "du -h",
    "cat /etc/hosts",
    "cat /etc/passwd",
    "yum check-update" ] as String[]
