@@ -42,7 +42,6 @@ node('vagrant') {
     echo 'Required for exited builds during box downloads'
     sh './clean.sh'
   }
-
 }
 def dockerTestCommands =
   ["echo hello world",
@@ -65,7 +64,7 @@ node('docker') {
     sh 'docker run --rm $DockerImageName ' + dockerTestCommands[i]
   }
 
-  /**stage 'Dockerhub-Login'
+  /*stage 'Dockerhub-Login'
   dockerHubLogin()
 
   try {
@@ -79,7 +78,7 @@ node('docker') {
   } finally {
     stage 'Dockerhub-Logout'
     sh 'docker logout'
-  }**/
+  }*/
 }
 
 /**
