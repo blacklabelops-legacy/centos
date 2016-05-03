@@ -15,8 +15,6 @@
  **/
 env.DockerImageName = 'blacklabelops/centos'
 def dockerTags = ["7", "7.2", "7.2.1511"] as String[]
-def DockerhubCredentialId = 'f6778d10-1814-4ab3-b8d5-a4f462096b73'
-def DockerhubEMailCredentialId = '60971e48-3a7d-4e13-b149-549eff3a0680'
 node('vagrant') {
   checkout scm
 
@@ -92,11 +90,11 @@ node('docker') {
 def dockerHubLogin() {
   echo 'Login to Dockerhub with Credentials Dockerhub and DockerhubEmail'
   withCredentials([[$class: 'UsernamePasswordMultiBinding',
-    credentialsId: DockerhubCredentialId,
+    credentialsId: 'Dockerhub',
     usernameVariable: 'USERNAME',
     passwordVariable: 'PASSWORD']]) {
     withCredentials([[$class: 'UsernamePasswordMultiBinding',
-      credentialsId: DockerhubEMailCredentialId,
+      credentialsId: 'DockerhubEmail',
       usernameVariable: 'DUMMY',
       passwordVariable: 'EMAIL']]) {
       sh 'docker login --email $EMAIL --username $USERNAME --password $PASSWORD'
