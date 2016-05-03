@@ -33,7 +33,7 @@ node('vagrant') {
     echo 'Archiving base image'
     archive 'blacklabelops-centos7.xz'
   } finally {
-    stage 'Post-Clean-Vagrantbox'
+    stage 'Clean-Vagrantbox'
     echo 'Properly clean the machine'
     echo 'Destroy Vagrant box'
     sh 'vagrant destroy -f'
