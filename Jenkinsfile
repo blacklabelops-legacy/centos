@@ -16,11 +16,7 @@
 env.DockerImageName = 'blacklabelops/centos'
 def dockerTags = ["7", "7.2", "7.2.1511"] as String[]
 node('vagrant') {
-  properties [
-    [$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', artifactDaysToKeepStr: '30', artifactNumToKeepStr: '10', daysToKeepStr: '30', numToKeepStr: '100']],
-    [$class: 'GithubProjectProperty', displayName: 'Github Project', projectUrlStr: 'https://github.com/blacklabelops/centos/'],
-    [$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 0, maxConcurrentTotal: 1, paramsToUseForLimit: '', throttleEnabled: true, throttleOption: 'project']
-  ]
+  properties [[$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 0, maxConcurrentTotal: 1, paramsToUseForLimit: '', throttleEnabled: true, throttleOption: 'project']]
   checkout scm
 
   try {
