@@ -16,7 +16,6 @@
 env.DockerImageName = 'blacklabelops/centos'
 def dockerTags = ["7", "7.2", "7.2.1511"] as String[]
 node('vagrant') {
-  properties [[$class: 'ThrottleJobProperty', categories: [], limitOneJobWithMatchingParams: false, maxConcurrentPerNode: 0, maxConcurrentTotal: 1, paramsToUseForLimit: '', throttleEnabled: true, throttleOption: 'project']]
   checkout scm
 
   try {
