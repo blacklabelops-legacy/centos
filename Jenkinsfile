@@ -20,5 +20,5 @@ node('docker') {
   utils = load('build/buildUtils.groovy')
   job = load './build/buildImage.groovy'
   settings = load './build/settings.groovy'
-  job.buildJobCI(settings.dockerImageName,settings.dockerTags,settings.dockerTestCommands,utils.getBranchName())
+  job.buildJob(settings.dockerImageName,settings.dockerTags,settings.dockerTestCommands,utils.getBranchName())
 }
