@@ -2,9 +2,14 @@
  * Jenkins 2.0 Buildfile
  **/
 
+def buildJob(dockerImageName,dockerTags,dockerTestCommands,branchName) {
+  stage 'Unarchive Base-Image'
+  unarchive mapping: ['blacklabelops-centos7.xz': 'blacklabelops-centos7.xz']
+  buildJobCI(dockerImageName,dockerTags,dockerTestCommands,branchName)
+}
+
 def buildJobCI(dockerImageName,dockerTags,dockerTestCommands,branchName) {
   stage 'Build Image'
-  unarchive mapping: ['blacklabelops-centos7.xz': 'blacklabelops-centos7.xz']
   echo 'Building the image'
   for (int i=0;i < dockerTags.length;i++) {
     buildImage(dockerImageName,dockerTags[i],branchName)
