@@ -4,6 +4,7 @@
 
 def buildJobCI(dockerImageName,dockerTags,dockerTestCommands,branchName) {
   stage 'Build Image'
+  unarchive mapping: ['blacklabelops-centos7.xz': 'blacklabelops-centos7.xz']
   echo 'Building the image'
   for (int i=0;i < dockerTags.length;i++) {
     buildImage(dockerImageName,dockerTags[i],branchName)
