@@ -3,6 +3,8 @@
 
 Deprecated repository, method does not work anymore!
 
+If you still want to create your own base image look here: [Docker: Create a base image](https://docs.docker.com/engine/userguide/eng-image/baseimages/)
+
 ## Release: blacklabelops/centos:latest
 
 In my view the most flexible way to build Docker Base Images. This project builds docker base images from kickstart files.
