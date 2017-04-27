@@ -1,7 +1,7 @@
 
 # Docker CentOS 7 Base Image
 
-[![Docker Repository on Quay.io](https://quay.io/repository/blacklabelops/centos/status "Docker Repository on Quay")](https://quay.io/repository/blacklabelops/centos) [![Docker Stars](https://img.shields.io/docker/stars/blacklabelops/centos.svg)](https://hub.docker.com/r/blacklabelops/centos/) [![Docker Pulls](https://img.shields.io/docker/pulls/blacklabelops/centos.svg)](https://hub.docker.com/r/blacklabelops/centos/)
+Deprecated repository, method does not work anymore!
 
 ## Release: blacklabelops/centos:latest
 
