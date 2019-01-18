@@ -81,10 +81,6 @@ $ ./dockerbox/squashImage.sh
 
 > This will build a docker image and update all packages, the result will be squashed inside a new xz-archive.
 
-# Support
-
-Leave a message and ask questions on Hipchat: [blacklabelops/hipchat](http://support.blacklabelops.com)
-
 # References
 
 * [Imagelayers.io](https://imagelayers.io/?images=blacklabelops%2Fcentos:latest)
